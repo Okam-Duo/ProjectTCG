@@ -1,5 +1,7 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class CardUI : MonoBehaviour
 {
@@ -13,6 +15,11 @@ public class CardUI : MonoBehaviour
 
     public HandUI Hand { get; private set; }
 
+    [Header("컴포넌트 참조")]
+    [SerializeField] private Image _image;
+    [SerializeField] private TextMeshProUGUI _nameText;
+    [SerializeField] private TextMeshProUGUI _descriptionText;
+    [Header("애니메이션 관련 변수")]
     [SerializeField] private float _idleScale;
     [SerializeField] private float _onMouseScale;
     [SerializeField] private float _onDragScale;
@@ -85,9 +92,12 @@ public class CardUI : MonoBehaviour
 
     #endregion
 
-    public void SetData(HandUI owner)
+    public void SetData(HandUI owner, CardData cardData)
     {
         Hand = owner;
+        _image.sprite = cardData.sprite;
+        _nameText.text = cardData.name;
+        _descriptionText.text = cardData.description;
     }
 
     public void SetOriginPosition(Vector3 position)
@@ -99,7 +109,7 @@ public class CardUI : MonoBehaviour
     {
         if (Hand.CheckConditionToUseCard(this))
         {
-            #warning 카드사용 로직 작성해야함
+#warning 카드사용 로직 작성해야함
         }
     }
 
