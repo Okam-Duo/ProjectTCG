@@ -47,7 +47,7 @@ public class CardUI : MonoBehaviour
         transform.localScale = new Vector3(_currentTargetScale, _currentTargetScale, _currentTargetScale);
         
         //카드가 기본상태라면 원래 위치로 돌아감
-        if (_state != ECardState.Idle)
+        if (_state == ECardState.Idle)
         {
             transform.position = _originPosition;
         }
