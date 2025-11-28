@@ -11,6 +11,8 @@ public class CardUI : MonoBehaviour
         OnUse = 3
     }
 
+    public HandUI Hand { get; private set; }
+
     [SerializeField] private float _idleScale;
     [SerializeField] private float _onMouseScale;
     [SerializeField] private float _onDragScale;
@@ -19,6 +21,7 @@ public class CardUI : MonoBehaviour
     [SerializeField] private ECardState _state;
 
     private float _currentTargetScale = 1;
+    private Vector3 _originPosition;
 
     private void Start()
     {
@@ -30,6 +33,7 @@ public class CardUI : MonoBehaviour
         transform.localScale = new Vector3(_currentTargetScale, _currentTargetScale, _currentTargetScale);
         if (_state != ECardState.Idle)
         {
+            transform.position = _originPosition;
         }
 
         if (_state == ECardState.OnDrag)
@@ -81,8 +85,22 @@ public class CardUI : MonoBehaviour
 
     #endregion
 
+    public void SetData(HandUI owner)
+    {
+        Hand = owner;
+    }
+
+    public void SetOriginPosition(Vector3 position)
+    {
+        _originPosition = position;
+    }
+
     private void TryUseCard()
     {
+        if (Hand.CheckConditionToUseCard(this))
+        {
+            #warning 카드사용 로직 작성해야함
+        }
     }
 
     private float GetTargetScale(ECardState state)
