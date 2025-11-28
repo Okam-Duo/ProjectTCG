@@ -98,6 +98,7 @@ public class CardUI : MonoBehaviour
         _image.sprite = cardData.sprite;
         _nameText.text = cardData.name;
         _descriptionText.text = cardData.description;
+        #warning UI¿¡ Èñ±Íµµ ¹Ý¿µÇØ¾ßÇÔ
     }
 
     public void SetOriginPosition(Vector3 position)
