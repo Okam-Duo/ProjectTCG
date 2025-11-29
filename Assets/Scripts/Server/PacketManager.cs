@@ -1,47 +1,47 @@
 using System;
 
-#warning Å¬¶óÀÌ¾ğÆ® °³¹ß¿ë ÀÓ½Ã ¾î´ğÅÍ Å¬·¡½º, ÃßÈÄ ±â´É ¿¬°á ÇÊ¿ä
-//Ãß°¡ µ¥ÀÌÅÍ´Â ÀüºÎ longÅ¸ÀÔÀ¸·Î ¶§¿ö³ùÀ¸´Ï ³ªÁß¿¡ º¯°æÇÏ°Å³ª ·ÎÁ÷ Ãß°¡ ÇÊ¿ä
-//Ä¿ÇÃ¸µÀ» ½Å°æ¾µ ÇÊ¿ä°¡ ¾ø´Ù°í ÆÇ´ÜµÉ ½Ã ÆĞÅ¶ ¼ö½Å ÀÌº¥Æ®¸¦ Äİ¹é¿¡¼­ ÇÔ¼ö·Î º¯°æ ¹Ù¶÷
+#warning í´ë¼ì´ì–¸íŠ¸ ê°œë°œìš© ì„ì‹œ ì–´ëŒ‘í„° í´ë˜ìŠ¤, ì¶”í›„ ê¸°ëŠ¥ ì—°ê²° í•„ìš”
+//ì¶”ê°€ ë°ì´í„°ëŠ” ì „ë¶€ longíƒ€ì…ìœ¼ë¡œ ë•Œì›Œë†¨ìœ¼ë‹ˆ ë‚˜ì¤‘ì— ë³€ê²½í•˜ê±°ë‚˜ ë¡œì§ ì¶”ê°€ í•„ìš”
+//ì»¤í”Œë§ì„ ì‹ ê²½ì“¸ í•„ìš”ê°€ ì—†ë‹¤ê³  íŒë‹¨ë  ì‹œ íŒ¨í‚· ìˆ˜ì‹  ì´ë²¤íŠ¸ë¥¼ ì½œë°±ì—ì„œ í•¨ìˆ˜ë¡œ ë³€ê²½ ë°”ëŒ
 
 
-//ÆĞÅ¶ ¼Û¼ö½Å ¾î´ğÅÍ
+//íŒ¨í‚· ì†¡ìˆ˜ì‹  ì–´ëŒ‘í„°
 public class PacketManager
 {
-    //½Ì±ÛÅÏ
+    //ì‹±ê¸€í„´
     public static PacketManager Instance { get; private set; } = new PacketManager();
 
     public enum GameResult
     {
-        Win,     //³»°¡ ½Â¸®
-        Lose,     //³»°¡ ÆĞ¹è
-        Draw     //¹«½ÂºÎ
+        Win,     //ë‚´ê°€ ìŠ¹ë¦¬
+        Lose,     //ë‚´ê°€ íŒ¨ë°°
+        Draw     //ë¬´ìŠ¹ë¶€
     }
 
-    #region ¼­¹öÀÇ ÆĞÅ¶ ¼ö½Å
+    #region ì„œë²„ì˜ íŒ¨í‚· ìˆ˜ì‹ 
 
     public event Action<GameResult> OnGameOver;
-    //ÇÃ·¹ÀÌ¾î ÀÎµ¦½º
+    //í”Œë ˆì´ì–´ ì¸ë±ìŠ¤
     public event Action<byte> OnChangeTure;
 
-    //ÇÃ·¹ÀÌ¾î ÀÎµ¦½º, Ä«µå ID
+    //í”Œë ˆì´ì–´ ì¸ë±ìŠ¤, ì¹´ë“œ ID
     public event Action<byte, int> OnDrawCard;
     public event Action<byte, int> OnUseCard;
-    //ÇÃ·¹ÀÌ¾î ÀÎµ¦½º, Ä«µå ID, Ãß°¡ µ¥ÀÌÅÍ
+    //í”Œë ˆì´ì–´ ì¸ë±ìŠ¤, ì¹´ë“œ ID, ì¶”ê°€ ë°ì´í„°
     public event Action<byte, int, long> OnRunCardEffect;
 
-    //ÇÃ·¹ÀÌ¾î ÀÎµ¦½º, ¿µ¿õ ÀÎµ¦½º, ½ºÅ³ ÀÎµ¦½º, Ãß°¡ µ¥ÀÌÅÍ
+    //í”Œë ˆì´ì–´ ì¸ë±ìŠ¤, ì˜ì›… ì¸ë±ìŠ¤, ìŠ¤í‚¬ ì¸ë±ìŠ¤, ì¶”ê°€ ë°ì´í„°
     public event Action<byte, int, int, long> OnHeroUseSkill;
-    //ÇÃ·¹ÀÌ¾î ÀÎµ¦½º, ¿µ¿õ ÀÎµ¦½º
+    //í”Œë ˆì´ì–´ ì¸ë±ìŠ¤, ì˜ì›… ì¸ë±ìŠ¤
     public event Action<byte, int> OnHeroDead;
-    //ÇÃ·¹ÀÌ¾î ÀÎµ¦½º, ¿µ¿õ ÀÎµ¦½º, º¯°æ Àü Ã¼·Â, º¯°æ ÈÄ Ã¼·Â
+    //í”Œë ˆì´ì–´ ì¸ë±ìŠ¤, ì˜ì›… ì¸ë±ìŠ¤, ë³€ê²½ ì „ ì²´ë ¥, ë³€ê²½ í›„ ì²´ë ¥
     public event Action<byte, int, int, int> OnHeroChangeHelath;
 
     #endregion
 
     private PacketManager() { }
 
-    #region ÆĞÅ¶ ¼Û½Å ÇÔ¼ö
+    #region íŒ¨í‚· ì†¡ì‹  í•¨ìˆ˜
 
     public void SendUseCardPacket(byte cardIndex, Action<bool> isSuccessCallback)
     {
