@@ -2,13 +2,14 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-//카드의 외형 데이터 전달용 구조체
-[Serializable]
-public struct CardData
+//카드의 외형 데이터 저장용 스크립터블 오브젝트
+//데이터베이스 적용 전 임시로 사용
+[CreateAssetMenu(fileName = "NewCardData", menuName = "Custom/서폿카드 데이터", order = int.MinValue)]
+public class CardData : ScriptableObject
 {
     public enum CardRarity
     {
-        #warning 카드 희귀도 목록 작성해야함
+#warning 카드 희귀도 목록 작성해야함
     }
 
     public Sprite sprite;     //카드 일러스트
