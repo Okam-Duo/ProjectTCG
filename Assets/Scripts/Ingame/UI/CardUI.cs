@@ -3,26 +3,26 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-//¼­Æı Ä«µå UI Å¬·¡½º
+//ì„œí¿ ì¹´ë“œ UI í´ë˜ìŠ¤
 public class CardUI : MonoBehaviour
 {
-    //Ä«µåÀÇ ¾Ö´Ï¸ŞÀÌ¼ÇÀ» À§ÇÑ »óÅÂ
+    //ì¹´ë“œì˜ ì• ë‹ˆë©”ì´ì…˜ì„ ìœ„í•œ ìƒíƒœ
     private enum CardState
     {
-        Idle = 0,     //ÇÃ·¹ÀÌ¾î¿Í »óÈ£ÀÛ¿ëÇÏÁö ¾Ê´Â ±âº» »óÅÂ
-        OnMouse = 1,     //Ä«µå À§¿¡ ¸¶¿ì½º°¡ ¿Ã·ÁÁü
-        OnDrag = 2,     //Ä«µå°¡ ¸¶¿ì½º·Î ÀÎÇØ µå·¡±×µÇ¾î µé·ÁÀÖÀ½
-        OnUse = 3     //Ä«µå°¡ »ç¿ëµÊ
+        Idle = 0,     //í”Œë ˆì´ì–´ì™€ ìƒí˜¸ì‘ìš©í•˜ì§€ ì•ŠëŠ” ê¸°ë³¸ ìƒíƒœ
+        OnMouse = 1,     //ì¹´ë“œ ìœ„ì— ë§ˆìš°ìŠ¤ê°€ ì˜¬ë ¤ì§
+        OnDrag = 2,     //ì¹´ë“œê°€ ë§ˆìš°ìŠ¤ë¡œ ì¸í•´ ë“œë˜ê·¸ë˜ì–´ ë“¤ë ¤ìˆìŒ
+        OnUse = 3     //ì¹´ë“œê°€ ì‚¬ìš©ë¨
     }
 
-    //ÀÌ Ä«µå¸¦ ¼ÒÀ¯ÇÑ ¼ÕÆĞ
+    //ì´ ì¹´ë“œë¥¼ ì†Œìœ í•œ ì†íŒ¨
     public HandUI Hand { get; private set; }
 
-    [Header("ÄÄÆ÷³ÍÆ® ÂüÁ¶")]
+    [Header("ì»´í¬ë„ŒíŠ¸ ì°¸ì¡°")]
     [SerializeField] private Image _image;
     [SerializeField] private TextMeshProUGUI _nameText;
     [SerializeField] private TextMeshProUGUI _descriptionText;
-    [Header("¾Ö´Ï¸ŞÀÌ¼Ç °ü·Ã º¯¼ö")]
+    [Header("ì• ë‹ˆë©”ì´ì…˜ ê´€ë ¨ ë³€ìˆ˜")]
     [SerializeField] private float _idleScale;
     [SerializeField] private float _onMouseScale;
     [SerializeField] private float _onDragScale;
@@ -30,10 +30,10 @@ public class CardUI : MonoBehaviour
 
     [SerializeField] private CardState _state;
 
-    //ÀÌ Ä«µåÀÇ Å©±â´Â ÇØ´ç º¯¼öÀÇ Å©±â¿¡ Á¡Á¡ °¡±î¿öÁü(¾Ö´Ï¸ŞÀÌ¼Ç)
+    //ì´ ì¹´ë“œì˜ í¬ê¸°ëŠ” í•´ë‹¹ ë³€ìˆ˜ì˜ í¬ê¸°ì— ì ì  ê°€ê¹Œì›Œì§(ì• ë‹ˆë©”ì´ì…˜)
     private float _currentTargetScale = 1;
-    //Ä«µå¸¦ »ç¿ëÇÏÁö ¾Ê¾ÒÀ» ¶§ µ¹¾Æ°¥ ¿ø·¡ ÁÂÇ¥
-    //¼ÕÆĞ¿¡¼­ Ä«µå°¡ µé·ÁÀÖ´ø ÁÂÇ¥ÀÓ
+    //ì¹´ë“œë¥¼ ì‚¬ìš©í•˜ì§€ ì•Šì•˜ì„ ë•Œ ëŒì•„ê°ˆ ì›ë˜ ì¢Œí‘œ
+    //ì†íŒ¨ì—ì„œ ì¹´ë“œê°€ ë“¤ë ¤ìˆë˜ ì¢Œí‘œì„
     private Vector3 _originPosition;
 
     private void Start()
@@ -43,25 +43,25 @@ public class CardUI : MonoBehaviour
 
     private void Update()
     {
-        //Ä«µåÀÇ Å©±â¸¦ º¯°æ
+        //ì¹´ë“œì˜ í¬ê¸°ë¥¼ ë³€ê²½
         transform.localScale = new Vector3(_currentTargetScale, _currentTargetScale, _currentTargetScale);
         
-        //Ä«µå°¡ ±âº»»óÅÂ¶ó¸é ¿ø·¡ À§Ä¡·Î µ¹¾Æ°¨
+        //ì¹´ë“œê°€ ê¸°ë³¸ìƒíƒœë¼ë©´ ì›ë˜ ìœ„ì¹˜ë¡œ ëŒì•„ê°
         if (_state == CardState.Idle)
         {
             transform.position = _originPosition;
         }
 
-        //Ä«µå¸¦ µé¾ú´Ù¸é ¸¶¿ì½º À§Ä¡¸¦ µû¶ó°¨
+        //ì¹´ë“œë¥¼ ë“¤ì—ˆë‹¤ë©´ ë§ˆìš°ìŠ¤ ìœ„ì¹˜ë¥¼ ë”°ë¼ê°
         if (_state == CardState.OnDrag)
         {
             transform.position = Mouse.current.position.ReadValue();
         }
     }
 
-    #region ¸¶¿ì½º ÀÌº¥Æ®
+    #region ë§ˆìš°ìŠ¤ ì´ë²¤íŠ¸
 
-    //¸¶¿ì½º°¡ UIÀ§¿¡ ¿Ã·ÁÁ³À» ¶§
+    //ë§ˆìš°ìŠ¤ê°€ UIìœ„ì— ì˜¬ë ¤ì¡Œì„ ë•Œ
     public void OnMouseEnterEvent()
     {
         if (_state == CardState.Idle)
@@ -70,17 +70,17 @@ public class CardUI : MonoBehaviour
         }
     }
 
-    //¸¶¿ì½º°¡ UIÀ§¿¡¼­ ³ª°¬À» ¶§
+    //ë§ˆìš°ìŠ¤ê°€ UIìœ„ì—ì„œ ë‚˜ê°”ì„ ë•Œ
     public void OnMouseExitEvent()
     {
-        //OnUseµîÀÇ »óÅÂ¿¡¼­ ³ª°¡´Â°Ç »ó°ü¾øÀ¸´Ï±î OnMouse»óÅÂ°¡ ¸Â´ÂÁö È®ÀÎÇØÁÜ
+        //OnUseë“±ì˜ ìƒíƒœì—ì„œ ë‚˜ê°€ëŠ”ê±´ ìƒê´€ì—†ìœ¼ë‹ˆê¹Œ OnMouseìƒíƒœê°€ ë§ëŠ”ì§€ í™•ì¸í•´ì¤Œ
         if (_state == CardState.OnMouse)
         {
             SetState(CardState.Idle);
         }
     }
 
-    //UI¸¦ µå·¡±×ÇÏ±â ½ÃÀÛÇßÀ» ¶§
+    //UIë¥¼ ë“œë˜ê·¸í•˜ê¸° ì‹œì‘í–ˆì„ ë•Œ
     public void OnMouseBeginDragEvent()
     {
         if (_state == CardState.OnMouse)
@@ -89,7 +89,7 @@ public class CardUI : MonoBehaviour
         }
     }
 
-    //UI µå·¡±×°¡ ³¡³µÀ» ¶§
+    //UI ë“œë˜ê·¸ê°€ ëë‚¬ì„ ë•Œ
     public void OnMouseEndDragEvent()
     {
         if (_state == CardState.OnDrag)
@@ -99,7 +99,7 @@ public class CardUI : MonoBehaviour
         }
     }
 
-    //¾Ö´Ï¸ŞÀÌ¼Ç »óÅÂ ¼³Á¤
+    //ì• ë‹ˆë©”ì´ì…˜ ìƒíƒœ ì„¤ì •
     private void SetState(CardState state)
     {
         _state = state;
@@ -108,34 +108,34 @@ public class CardUI : MonoBehaviour
 
     #endregion
 
-    //Ä«µåUI µ¥ÀÌÅÍ ÃÊ±âÈ­
-    //Ä«µåUI »ı¼º½Ã È£ÃâÇØ¾ßµÊ
+    //ì¹´ë“œUI ë°ì´í„° ì´ˆê¸°í™”
+    //ì¹´ë“œUI ìƒì„±ì‹œ í˜¸ì¶œí•´ì•¼ë¨
     public void SetData(HandUI owner, CardData cardData)
     {
         Hand = owner;
         _image.sprite = cardData.sprite;
         _nameText.text = cardData.name;
         _descriptionText.text = cardData.description;
-        #warning UI¿¡ Èñ±Íµµ ¹İ¿µÇØ¾ßÇÔ
+        #warning UIì— í¬ê·€ë„ ë°˜ì˜í•´ì•¼í•¨
     }
 
-    //¼ÕÆĞ¿¡¼­ Ä«µå À§Ä¡¸¦ ÁöÁ¤ÇØÁÖ´Â ¿ëµµÀÇ ÇÔ¼ö
+    //ì†íŒ¨ì—ì„œ ì¹´ë“œ ìœ„ì¹˜ë¥¼ ì§€ì •í•´ì£¼ëŠ” ìš©ë„ì˜ í•¨ìˆ˜
     public void SetOriginPosition(Vector3 position)
     {
         _originPosition = position;
     }
 
-    //Ä«µå »ç¿ë ½Ãµµ
+    //ì¹´ë“œ ì‚¬ìš© ì‹œë„
     private void TryUseCard()
     {
-        //UIÃø¸é¿¡¼­ È®ÀÎÇÒ Á¶°Ç
+        //UIì¸¡ë©´ì—ì„œ í™•ì¸í•  ì¡°ê±´
         if (Hand.CheckConditionToUseCard(this))
         {
-#warning Ä«µå»ç¿ë ·ÎÁ÷ ÀÛ¼ºÇØ¾ßÇÔ
+#warning ì¹´ë“œì‚¬ìš© ë¡œì§ ì‘ì„±í•´ì•¼í•¨
         }
     }
 
-    //¾Ö´Ï¸ŞÀÌ¼Ç Å¸ÀÔ¿¡ µû¸¥ ½ºÄÉÀÏ ¹Ş¾Æ¿À±â
+    //ì• ë‹ˆë©”ì´ì…˜ íƒ€ì…ì— ë”°ë¥¸ ìŠ¤ì¼€ì¼ ë°›ì•„ì˜¤ê¸°
     private float GetTargetScale(CardState state)
     {
         switch (state)
@@ -149,7 +149,7 @@ public class CardUI : MonoBehaviour
             case CardState.OnUse:
                 return _onUseScale;
             default:
-                Debug.Assert(false, "CardUI Å¬·¡½º¿¡¼­ »õ·Î¿î ECardState Å¸ÀÔ¿¡ ´ëÇÑ Ä«µå »çÀÌÁî ÇÒ´ç ÇÊ¿ä");
+                Debug.Assert(false, "CardUI í´ë˜ìŠ¤ì—ì„œ ìƒˆë¡œìš´ ECardState íƒ€ì…ì— ëŒ€í•œ ì¹´ë“œ ì‚¬ì´ì¦ˆ í• ë‹¹ í•„ìš”");
                 return -1;
         }
     }

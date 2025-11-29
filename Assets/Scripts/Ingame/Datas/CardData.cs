@@ -2,17 +2,17 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-//Ä«µåÀÇ ¿ÜÇü µ¥ÀÌÅÍ Àü´Ş¿ë ±¸Á¶Ã¼
+//ì¹´ë“œì˜ ì™¸í˜• ë°ì´í„° ì „ë‹¬ìš© êµ¬ì¡°ì²´
 [Serializable]
 public struct CardData
 {
     public enum CardRarity
     {
-        #warning Ä«µå Èñ±Íµµ ¸ñ·Ï ÀÛ¼ºÇØ¾ßÇÔ
+        #warning ì¹´ë“œ í¬ê·€ë„ ëª©ë¡ ì‘ì„±í•´ì•¼í•¨
     }
 
-    public Sprite sprite;     //Ä«µå ÀÏ·¯½ºÆ®
-    public string name;     //Ä«µå ÀÌ¸§
-    public string description;     //Ä«µå ¼³¸í
-    public CardRarity rarity;     //Ä«µå Èñ±Íµµ
+    public Sprite sprite;     //ì¹´ë“œ ì¼ëŸ¬ìŠ¤íŠ¸
+    public string name;     //ì¹´ë“œ ì´ë¦„
+    public string description;     //ì¹´ë“œ ì„¤ëª…
+    public CardRarity rarity;     //ì¹´ë“œ í¬ê·€ë„
 }
