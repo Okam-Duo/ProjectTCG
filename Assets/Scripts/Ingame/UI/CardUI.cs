@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class CardUI : MonoBehaviour
 {
     //카드의 애니메이션을 위한 상태
-    private enum ECardState
+    private enum CardState
     {
         Idle = 0,     //플레이어와 상호작용하지 않는 기본 상태
         OnMouse = 1,     //카드 위에 마우스가 올려짐
@@ -28,7 +28,7 @@ public class CardUI : MonoBehaviour
     [SerializeField] private float _onDragScale;
     [SerializeField] private float _onUseScale;
 
-    [SerializeField] private ECardState _state;
+    [SerializeField] private CardState _state;
 
     //이 카드의 크기는 해당 변수의 크기에 점점 가까워짐(애니메이션)
     private float _currentTargetScale = 1;
@@ -38,7 +38,7 @@ public class CardUI : MonoBehaviour
 
     private void Start()
     {
-        SetState(ECardState.Idle);
+        SetState(CardState.Idle);
     }
 
     private void Update()
@@ -47,13 +47,13 @@ public class CardUI : MonoBehaviour
         transform.localScale = new Vector3(_currentTargetScale, _currentTargetScale, _currentTargetScale);
         
         //카드가 기본상태라면 원래 위치로 돌아감
-        if (_state == ECardState.Idle)
+        if (_state == CardState.Idle)
         {
             transform.position = _originPosition;
         }
 
         //카드를 들었다면 마우스 위치를 따라감
-        if (_state == ECardState.OnDrag)
+        if (_state == CardState.OnDrag)
         {
             transform.position = Mouse.current.position.ReadValue();
         }
@@ -64,9 +64,9 @@ public class CardUI : MonoBehaviour
     //마우스가 UI위에 올려졌을 때
     public void OnMouseEnterEvent()
     {
-        if (_state == ECardState.Idle)
+        if (_state == CardState.Idle)
         {
-            SetState(ECardState.OnMouse);
+            SetState(CardState.OnMouse);
         }
     }
 
@@ -74,33 +74,33 @@ public class CardUI : MonoBehaviour
     public void OnMouseExitEvent()
     {
         //OnUse등의 상태에서 나가는건 상관없으니까 OnMouse상태가 맞는지 확인해줌
-        if (_state == ECardState.OnMouse)
+        if (_state == CardState.OnMouse)
         {
-            SetState(ECardState.Idle);
+            SetState(CardState.Idle);
         }
     }
 
     //UI를 드래그하기 시작했을 때
     public void OnMouseBeginDragEvent()
     {
-        if (_state == ECardState.OnMouse)
+        if (_state == CardState.OnMouse)
         {
-            SetState(ECardState.OnDrag);
+            SetState(CardState.OnDrag);
         }
     }
 
     //UI 드래그가 끝났을 때
     public void OnMouseEndDragEvent()
     {
-        if (_state == ECardState.OnDrag)
+        if (_state == CardState.OnDrag)
         {
-            SetState(ECardState.OnUse);
+            SetState(CardState.OnUse);
             TryUseCard();
         }
     }
 
     //애니메이션 상태 설정
-    private void SetState(ECardState state)
+    private void SetState(CardState state)
     {
         _state = state;
         _currentTargetScale = GetTargetScale(state);
@@ -136,17 +136,17 @@ public class CardUI : MonoBehaviour
     }
 
     //애니메이션 타입에 따른 스케일 받아오기
-    private float GetTargetScale(ECardState state)
+    private float GetTargetScale(CardState state)
     {
         switch (state)
         {
-            case ECardState.Idle:
+            case CardState.Idle:
                 return _idleScale;
-            case ECardState.OnMouse:
+            case CardState.OnMouse:
                 return _onMouseScale;
-            case ECardState.OnDrag:
+            case CardState.OnDrag:
                 return _onDragScale;
-            case ECardState.OnUse:
+            case CardState.OnUse:
                 return _onUseScale;
             default:
                 Debug.Assert(false, "CardUI 클래스에서 새로운 ECardState 타입에 대한 카드 사이즈 할당 필요");
