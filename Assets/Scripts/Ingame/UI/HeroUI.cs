@@ -12,6 +12,12 @@ public class HeroUI : MonoBehaviour
     private Vector3 _originPosition;
 
 
+    private void Update()
+    {
+        transform.position = _originPosition;
+    }
+
+
     public void SetData(HeroData heroData)
     {
         _image.sprite = heroData.Sprite;
