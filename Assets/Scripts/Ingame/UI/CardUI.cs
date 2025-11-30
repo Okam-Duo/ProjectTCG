@@ -113,9 +113,9 @@ public class CardUI : MonoBehaviour
     public void SetData(HandUI owner, CardData cardData)
     {
         Hand = owner;
-        _image.sprite = cardData.sprite;
-        _nameText.text = cardData.name;
-        _descriptionText.text = cardData.description;
+        _image.sprite = cardData.Sprite;
+        _nameText.text = cardData.Name;
+        _descriptionText.text = cardData.Description;
         #warning UI에 희귀도 반영해야함
     }
 
