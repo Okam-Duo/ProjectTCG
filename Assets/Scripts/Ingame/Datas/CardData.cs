@@ -12,6 +12,8 @@ public class CardData : ScriptableObject
 #warning 카드 희귀도 목록 작성해야함
     }
 
+    public int CardID;
+
     public Sprite Sprite;     //카드 일러스트
     public string Name;     //카드 이름
     public string Description;     //카드 설명
