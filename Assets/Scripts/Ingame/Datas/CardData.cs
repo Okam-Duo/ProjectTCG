@@ -18,4 +18,5 @@ public class CardData : ScriptableObject
     public string Name;     //카드 이름
     public string Description;     //카드 설명
     public CardRarity Rarity;     //카드 희귀도
+    public HeroData HeroData;     //이 카드를 사용하는 영웅
 }
