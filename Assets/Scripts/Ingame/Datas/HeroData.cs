@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewHeroData", menuName = "Custom/영웅카드 데이터", order = int.MinValue)]
 public class HeroData : ScriptableObject
 {
+    public int HeroID;
+
     public Sprite Sprite;     //영웅 일러스트
     public string Name;     //영웅 이름
     public int MaxHealth => 10;    //최대 체력
