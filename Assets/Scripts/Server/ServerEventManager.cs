@@ -6,10 +6,10 @@ using System;
 
 
 //패킷 송수신 어댑터
-public class PacketManager
+public class ServerEventManager
 {
     //싱글턴
-    public static PacketManager Instance { get; private set; } = new PacketManager();
+    public static ServerEventManager Instance { get; private set; } = new ServerEventManager();
 
     public enum GameResult
     {
@@ -39,7 +39,7 @@ public class PacketManager
 
     #endregion
 
-    private PacketManager() { }
+    private ServerEventManager() { }
 
     #region 패킷 송신 함수
 
