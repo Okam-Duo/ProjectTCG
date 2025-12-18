@@ -7,7 +7,7 @@ using UnityEngine.UI;
 [CreateAssetMenu(fileName = "NewCardData", menuName = "Custom/서폿카드 데이터", order = int.MinValue)]
 public class CardData : ScriptableObject
 {
-    public int CardID;
+    public int Id;
 
     public Sprite Sprite;     //카드 일러스트
     public string Name;     //카드 이름
