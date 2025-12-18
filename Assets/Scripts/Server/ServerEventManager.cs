@@ -20,22 +20,6 @@ public class ServerEventManager
 
     #region 서버의 패킷 수신
 
-    public event Action<GameResult> OnGameOver;
-    //플레이어 인덱스
-    public event Action<byte> OnChangeTure;
-
-    //플레이어 인덱스, 카드 ID
-    public event Action<byte, int> OnDrawCard;
-    public event Action<byte, int> OnUseCard;
-    //플레이어 인덱스, 카드 ID, 추가 데이터
-    public event Action<byte, int, long> OnRunCardEffect;
-
-    //플레이어 인덱스, 영웅 인덱스, 스킬 인덱스, 추가 데이터
-    public event Action<byte, int, int, long> OnHeroUseSkill;
-    //플레이어 인덱스, 영웅 인덱스
-    public event Action<byte, int> OnHeroDead;
-    //플레이어 인덱스, 영웅 인덱스, 변경 전 체력, 변경 후 체력
-    public event Action<byte, int, int, int> OnHeroChangeHelath;
 
     #endregion
 
@@ -43,32 +27,6 @@ public class ServerEventManager
 
     #region 패킷 송신 함수
 
-    public void SendUseCardPacket(byte cardIndex, Action<bool> isSuccessCallback)
-    {
-        SendUseCardPacket(cardIndex, 0, isSuccessCallback);
-
-        isSuccessCallback?.Invoke(true);
-    }
-
-    public void SendUseCardPacket(byte cardIndex, long additionalData, Action<bool> isSuccessCallback)
-    {
-        isSuccessCallback?.Invoke(true);
-    }
-
-    public void SendHeroUseSkill(int heroIndex, int skillIndex, long additionalData, Action<bool> isSuccessCallback)
-    {
-        isSuccessCallback?.Invoke(true);
-    }
-
-    public void SendEndTurn()
-    {
-
-    }
-
-    public void SendSurrender()
-    {
-
-    }
 
     #endregion
 }
