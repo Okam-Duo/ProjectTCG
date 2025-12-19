@@ -12,7 +12,7 @@ public record CardData
     public readonly bool IsToken;    //토큰카드(덱에 편성 불가능한 카드) 여부
     public readonly Sprite Sprite;     //카드 일러스트
 
-    public CardData(int id, StaticDataManager.CardDataHolder dataHolder)
+    public CardData(int id, CardDataHolder dataHolder)
     {
         Id = id;
         Name = dataHolder.Name;

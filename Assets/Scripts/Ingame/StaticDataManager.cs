@@ -7,45 +7,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 public class StaticDataManager
 {
 
-    #region 데이터 입력용 스크립터블 오브젝트
-
-    [CreateAssetMenu(fileName = "CardTable", menuName = "Custom/카드 테이블", order = int.MinValue)]
-    public class CardTable : ScriptableObject
-    {
-        public CardDataHolder[] cards;
-    }
-
-    [CreateAssetMenu(fileName = "HeroList", menuName = "Custom/영웅 테이블", order = int.MinValue)]
-    public class HeroTable : ScriptableObject
-    {
-        public HeroDataHolder[] heroes;
-    }
-
-    [CreateAssetMenu(fileName = "NewHeroData", menuName = "Custom/영웅 데이터", order = int.MinValue)]
-    public class HeroDataHolder : ScriptableObject
-    {
-        [Header("영웅 일러스트")]
-        public Sprite Sprite;
-        [Header("영웅 이름")]
-        public string Name;
-        [Header("최대 체력")]
-        public int MaxHealth;
-    }
-
-    [CreateAssetMenu(fileName = "NewCardData", menuName = "Custom/서폿카드 데이터", order = int.MinValue)]
-    public class CardDataHolder : ScriptableObject
-    {
-        [Header("카드 일러스트")]
-        public Sprite Sprite;
-        [Header("카드 이름")]
-        public string Name;
-        [Header("카드 설명")]
-        public string Description;
-        [Header("카드 희귀도")]
-        public CardRarity Rarity;
-        [Header("토큰카드 여부")]
-        public bool IsToken;
-    }
+    #region 테이블 파일 경로
 
     private const string _cardTableAddress = "CardTable";
     private const string _heroTableAddress = "HeroTable";

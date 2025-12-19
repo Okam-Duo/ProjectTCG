@@ -10,7 +10,7 @@ public record HeroData
     public readonly int MaxHealth;    //최대 체력
     public readonly Sprite Sprite;     //영웅 일러스트
 
-    public HeroData(int id, StaticDataManager.HeroDataHolder dataHolder)
+    public HeroData(int id, HeroDataHolder dataHolder)
     {
         Id = id;
         Name = dataHolder.Name;
