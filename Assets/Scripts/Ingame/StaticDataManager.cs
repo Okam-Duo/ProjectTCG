@@ -9,8 +9,8 @@ public class StaticDataManager
 
     #region 테이블 파일 경로
 
-    private const string _cardTableAddress = "CardTable";
-    private const string _heroTableAddress = "HeroTable";
+    private const string _cardTableAddress = "StaticDataManager/CardTable";
+    private const string _heroTableAddress = "StaticDataManager/HeroTable";
 
     #endregion
 
