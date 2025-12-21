@@ -1,0 +1,3 @@
+[submodule "Assets/Scripts/Shared/ProjectTCG-shared"]
+	path = Assets/Scripts/Shared/ProjectTCG-shared
+	url = https://github.com/Okam-Duo/ProjectTCG-shared.git
