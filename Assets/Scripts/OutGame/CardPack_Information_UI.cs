@@ -12,4 +12,10 @@ public class CardPack_Information_UI : MonoBehaviour
 
     public TextMeshProUGUI informationtext;
 
+
+    public void CloseCardPackInformation()
+    {
+        gameObject.SetActive(false);
+    }
+
 }
