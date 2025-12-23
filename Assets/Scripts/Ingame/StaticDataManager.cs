@@ -15,6 +15,7 @@ public sealed class StaticDataManager
 
     private const string _cardTableAddress = _addressPrefix + "CardTable";
     private const string _heroTableAddress = _addressPrefix + "HeroTable";
+    private const string _packTableAddress = _addressPrefix + "PackTable";
 
 
     #endregion
@@ -28,6 +29,7 @@ public sealed class StaticDataManager
 
     private StaticDataLoader<HeroData, HeroTable, HeroDataHolder> _heroDataLoader;
     private StaticDataLoader<CardData, CardTable, CardDataHolder> _cardDataLoader;
+    private StaticDataLoader<PackData, PackTable, PackDataHolder> _packDataLoader;
 
     #endregion
 
@@ -37,6 +39,7 @@ public sealed class StaticDataManager
     {
         _heroDataLoader = new(_heroTableAddress, CheckLoadingEnd);
         _cardDataLoader = new(_cardTableAddress, CheckLoadingEnd);
+        _packDataLoader = new(_packTableAddress, CheckLoadingEnd);
 
         _onLoaded = onLoaded;
     }
@@ -58,6 +61,13 @@ public sealed class StaticDataManager
         Debug.Assert(IsReady, "테이블이 준비되지 않았습니다.");
 
         return _instance._heroDataLoader.GetData(id);
+    }
+
+    public static PackData GetPackData(int id)
+    {
+        Debug.Assert(IsReady, "테이블이 준비되지 않았습니다.");
+
+        return _instance._packDataLoader.GetData(id);
     }
 
     #region 기능 구현용 private요소들
