@@ -3,91 +3,64 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using static UnityEngine.Rendering.DebugUI;
 
-public class StaticDataManager
+//id기반 정적 데이터 관리자
+public sealed class StaticDataManager
 {
 
-    #region 테이블 파일 경로
+    #region 테이블 주소
 
-    private const string _cardTableAddress = "StaticDataManager/CardTable";
-    private const string _heroTableAddress = "StaticDataManager/HeroTable";
+    private const string _addressPrefix = "StaticDataManager/";
+
+    private const string _cardTableAddress = _addressPrefix + "CardTable";
+    private const string _heroTableAddress = _addressPrefix + "HeroTable";
+
 
     #endregion
-
-    public static bool IsReady { get; private set; } = false;
 
     #region private 필드
 
     private static StaticDataManager _instance;
 
     private Action _onLoaded;
-
-    private CardData[] _cardDatas;
-    private HeroData[] _heroDatas;
     private int _loadingCounter = 0;
+
+    private StaticDataLoader<HeroData, HeroTable, HeroDataHolder> _heroDataLoader;
+    private StaticDataLoader<CardData, CardTable, CardDataHolder> _cardDataLoader;
 
     #endregion
 
+    public static bool IsReady { get; private set; } = false;
+
+    private StaticDataManager(Action onLoaded)
+    {
+        _heroDataLoader = new(_heroTableAddress, CheckLoadingEnd);
+        _cardDataLoader = new(_cardTableAddress, CheckLoadingEnd);
+
+        _onLoaded = onLoaded;
+    }
+
     public static void LoadTableAsync(Action onLoadedTable)
     {
-        _instance = new();
-        _instance._onLoaded = onLoadedTable;
-        _instance.GetAddressedDatasAsync();
+        _instance = new(onLoadedTable);
     }
 
     public static CardData GetCardData(int id)
     {
-        Debug.Assert(id >= 0 && id < _instance._cardDatas.Length, "참조하려는 카드의 id가 범위를 벗어났습니다.");
-        Debug.Assert(_instance._cardDatas[id] != null, "참조하려는 id의 카드가 할당되지 않았습니다.");
         Debug.Assert(IsReady, "테이블이 준비되지 않았습니다.");
 
-        return _instance._cardDatas[id];
+        return _instance._cardDataLoader.GetData(id);
     }
 
     public static HeroData GetHeroData(int id)
     {
-        Debug.Assert(id >= 0 && id < _instance._cardDatas.Length, "참조하려는 영웅의 id가 범위를 벗어났습니다.");
-        Debug.Assert(_instance._cardDatas[id] != null, "참조하려는 id의 영웅이 할당되지 않았습니다.");
         Debug.Assert(IsReady, "테이블이 준비되지 않았습니다.");
 
-        return _instance._heroDatas[id];
+        return _instance._heroDataLoader.GetData(id);
     }
 
-    #region 파일 읽기
-
-    private void GetAddressedDatasAsync()
-    {
-        Addressables.LoadAssetAsync<CardTable>(_cardTableAddress).Completed += OnLoadedCardTable;
-        Addressables.LoadAssetAsync<HeroTable>(_heroTableAddress).Completed += OnLoadedHeroTable;
-    }
-
-    private void OnLoadedCardTable(AsyncOperationHandle<CardTable> table)
-    {
-        CardTable cardTable = table.Result;
-
-        _cardDatas = new CardData[cardTable.cards.Length];
-
-        for (int i = 0; i < _cardDatas.Length; i++)
-        {
-            _cardDatas[i] = new CardData(i, cardTable.cards[i]);
-        }
-
-        CheckLoadingEnd();
-    }
-
-    private void OnLoadedHeroTable(AsyncOperationHandle<HeroTable> table)
-    {
-        HeroTable heroTable = table.Result;
-
-        _heroDatas = new HeroData[heroTable.heroes.Length];
-
-        for (int i = 0; i < _heroDatas.Length; i++)
-        {
-            _heroDatas[i] = new HeroData(i, heroTable.heroes[i]);
-        }
-
-        CheckLoadingEnd();
-    }
+    #region 기능 구현용 private요소들
 
     private void CheckLoadingEnd()
     {
@@ -100,5 +73,44 @@ public class StaticDataManager
         }
     }
 
+    private class StaticDataLoader<DataT, TableT, HolderT>
+        where TableT : IStaticDataTable<HolderT>
+        where HolderT : IStaticDataHolder<DataT>
+    {
+        private HolderT[] _holders;
+        private Action _onLoaded;
+
+        public StaticDataLoader(string tableAddress, Action OnLoaded)
+        {
+            Addressables.LoadAssetAsync<TableT>(tableAddress).Completed += OnLoadedTable;
+            _onLoaded = OnLoaded;
+        }
+
+        public DataT GetData(int id)
+        {
+            Debug.Assert(id >= 0 && id < _holders.Length, "참조하려는 데이터의 id가 범위를 벗어났습니다.");
+            Debug.Assert(_holders[id] != null, "참조하려는 데이터의 영웅이 할당되지 않았습니다.");
+
+            return _holders[id].GetData();
+        }
+
+        private void OnLoadedTable(AsyncOperationHandle<TableT> tableHandle)
+        {
+            _holders = tableHandle.Result.Holders;
+
+            _onLoaded?.Invoke();
+        }
+    }
+
     #endregion
+}
+
+public interface IStaticDataTable<DataHolderT>
+{
+    DataHolderT[] Holders { get; }
+}
+
+public interface IStaticDataHolder<DataT>
+{
+    DataT GetData();
 }

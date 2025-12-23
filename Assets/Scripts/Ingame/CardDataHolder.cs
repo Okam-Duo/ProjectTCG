@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewCardData", menuName = "Custom/카드 데이터", order = int.MinValue)]
-public class CardDataHolder : ScriptableObject
+public class CardDataHolder : ScriptableObject, IStaticDataHolder<CardData>
 {
     [Header("카드 일러스트")]
     public Sprite Sprite;
@@ -13,4 +13,6 @@ public class CardDataHolder : ScriptableObject
     public CardRarity Rarity;
     [Header("토큰카드 여부")]
     public bool IsToken;
+
+    public CardData GetData() => new CardData(Name, Description, Rarity, IsToken, Sprite);
 }
