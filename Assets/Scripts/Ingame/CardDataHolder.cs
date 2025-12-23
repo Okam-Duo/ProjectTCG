@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewCardData", menuName = "Custom/서폿카드 데이터", order = int.MinValue)]
+[CreateAssetMenu(fileName = "NewCardData", menuName = "Custom/카드 데이터", order = int.MinValue)]
 public class CardDataHolder : ScriptableObject
 {
     [Header("카드 일러스트")]
