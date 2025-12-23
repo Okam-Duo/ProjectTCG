@@ -18,6 +18,7 @@ public sealed class StaticDataManager
     private const string _heroTableAddress = _addressPrefix + "HeroTable";
     private const string _packTableAddress = _addressPrefix + "PackTable";
 
+    private const int _loadDataTypeCount = 3;
 
     #endregion
 
@@ -83,7 +84,7 @@ public sealed class StaticDataManager
     {
         int result = Interlocked.Increment(ref _loadingCounter);
 
-        if (result == 2)
+        if (result == _loadDataTypeCount)
         {
             IsReady = true;
             _onLoaded?.Invoke();
