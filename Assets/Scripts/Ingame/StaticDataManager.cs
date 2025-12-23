@@ -3,7 +3,6 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using static UnityEngine.Rendering.DebugUI;
 
 //id기반 정적 데이터 관리자
 public sealed class StaticDataManager
@@ -113,14 +112,14 @@ public sealed class StaticDataManager
     }
 
     #endregion
-}
 
-public interface IStaticDataTable<DataHolderT>
-{
-    DataHolderT[] Holders { get; }
-}
+    public interface IStaticDataTable<DataHolderT>
+    {
+        DataHolderT[] Holders { get; }
+    }
 
-public interface IStaticDataHolder<DataT>
-{
-    DataT GetData();
+    public interface IStaticDataHolder<DataT>
+    {
+        DataT GetData();
+    }
 }

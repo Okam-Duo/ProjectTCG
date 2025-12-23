@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewCardData", menuName = "Custom/카드 데이터", order = int.MinValue)]
-public class CardDataHolder : ScriptableObject, IStaticDataHolder<CardData>
+public class CardDataHolder : ScriptableObject, StaticDataManager.IStaticDataHolder<CardData>
 {
     [Header("카드 일러스트")]
     public Sprite Sprite;

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewPackData", menuName = "Custom/팩 데이터", order = int.MinValue)]
-public class PackDataHolder : ScriptableObject, IStaticDataHolder<PackData>
+public class PackDataHolder : ScriptableObject, StaticDataManager.IStaticDataHolder<PackData>
 {
     [Header("카드 일러스트")]
     public Sprite Sprite;
