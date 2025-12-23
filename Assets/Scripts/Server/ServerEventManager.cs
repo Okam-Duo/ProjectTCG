@@ -11,13 +11,6 @@ public class ServerEventManager
     //싱글턴
     public static ServerEventManager Instance { get; private set; } = new ServerEventManager();
 
-    public enum GameResult
-    {
-        Win,     //내가 승리
-        Lose,     //내가 패배
-        Draw     //무승부
-    }
-
     #region 서버의 패킷 수신
 
 
