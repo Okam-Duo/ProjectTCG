@@ -1,4 +1,6 @@
+using Shared.Network;
 using System;
+using System.Collections.Generic;
 
 #warning 클라이언트 개발용 임시 어댑터 클래스, 추후 기능 연결 필요
 //추가 데이터는 전부 long타입으로 때워놨으니 나중에 변경하거나 로직 추가 필요
@@ -11,22 +13,12 @@ public class ServerEventManager
     //싱글턴
     public static ServerEventManager Instance { get; private set; } = new ServerEventManager();
 
-    public enum GameResult
-    {
-        Win,     //내가 승리
-        Lose,     //내가 패배
-        Draw     //무승부
-    }
-
-    #region 서버의 패킷 수신
-
-
-    #endregion
+    public Dictionary<Type, Action<IPacket>> OnRecievePacket { get; private set; }
 
     private ServerEventManager() { }
 
-    #region 패킷 송신 함수
-
-
-    #endregion
+    public void Send(IPacket packet)
+    {
+        //TODO
+    }
 }
