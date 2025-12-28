@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "HeroTable", menuName = "Custom/영웅 테이블", order = int.MinValue)]
+[CreateAssetMenu(fileName = "HeroTable", menuName = "Custom/데이터 테이블/영웅 테이블", order = int.MinValue)]
 public class HeroTable : ScriptableObject, StaticDataManager.IStaticDataTable<HeroDataHolder>
 {
     [SerializeField] private HeroDataHolder[] heroes;
