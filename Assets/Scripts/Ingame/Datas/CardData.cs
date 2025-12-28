@@ -22,5 +22,8 @@ public record CardData
 
 public enum CardRarity
 {
-#warning 카드 희귀도 목록 작성해야함
+    Common,
+    Rare,
+    Epic,
+    Legendary
 }
