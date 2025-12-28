@@ -11,7 +11,7 @@ public class PackDataHolder : ScriptableObject, StaticDataManager.IStaticDataHol
     [Header("팩 설명")]
     public string Description;
     [Header("보상 리스트(보상 형식과 id 입력)")]
-    public KeyValuePair<ResourceType, int>[] Rewards;     //<보상 타입, id> 배열
+    public PackRewardData[] Rewards;     //<보상 타입, id> 배열
 
     public PackData GetData() => new PackData(Name, Description, Sprite, Rewards);
 }
