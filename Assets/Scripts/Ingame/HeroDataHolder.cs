@@ -7,8 +7,10 @@ public class HeroDataHolder : ScriptableObject, StaticDataManager.IStaticDataHol
     public Sprite Sprite;
     [Header("영웅 이름")]
     public string Name;
+    [Header("영웅 설명")]
+    public string Description;
     [Header("최대 체력")]
     public int MaxHealth;
 
-    public HeroData GetData() => new HeroData(Name, MaxHealth, Sprite);
+    public HeroData GetData() => new HeroData(Name, Description, MaxHealth, Sprite);
 }
