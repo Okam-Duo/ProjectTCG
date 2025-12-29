@@ -29,15 +29,15 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2636534547428393228}
-  - {fileID: 6090591774932958325}
-  - {fileID: 6015223487000179526}
+  - {fileID: 3975714880360745748}
+  - {fileID: 7302374247300606626}
+  - {fileID: 1249711291250311481}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1577.9404, y: 368.0939}
+  m_AnchoredPosition: {x: -323.63086, y: 135.69427}
+  m_SizeDelta: {x: 2225.2021, y: 639.4825}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3144310109074646264
 MonoBehaviour:
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!1001 &879425406020561326
+--- !u!1001 &2273773632787309494
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -99,11 +99,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2928046249406687394, guid: 94c79d322d4007f4fa019c3f760054fb, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 171
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 2928046249406687394, guid: 94c79d322d4007f4fa019c3f760054fb, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 225.145
+      value: 481
       objectReference: {fileID: 0}
     - target: {fileID: 2928046249406687394, guid: 94c79d322d4007f4fa019c3f760054fb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -162,12 +162,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94c79d322d4007f4fa019c3f760054fb, type: 3}
---- !u!224 &2636534547428393228 stripped
+--- !u!224 &3975714880360745748 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2928046249406687394, guid: 94c79d322d4007f4fa019c3f760054fb, type: 3}
-  m_PrefabInstance: {fileID: 879425406020561326}
+  m_PrefabInstance: {fileID: 2273773632787309494}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &8924128303010782180
+--- !u!1001 &4176348961009428891
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -201,11 +201,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2928046249406687394, guid: 94c79d322d4007f4fa019c3f760054fb, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 171
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 2928046249406687394, guid: 94c79d322d4007f4fa019c3f760054fb, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 225.145
+      value: 481
       objectReference: {fileID: 0}
     - target: {fileID: 2928046249406687394, guid: 94c79d322d4007f4fa019c3f760054fb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -264,12 +264,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94c79d322d4007f4fa019c3f760054fb, type: 3}
---- !u!224 &6015223487000179526 stripped
+--- !u!224 &1249711291250311481 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2928046249406687394, guid: 94c79d322d4007f4fa019c3f760054fb, type: 3}
-  m_PrefabInstance: {fileID: 8924128303010782180}
+  m_PrefabInstance: {fileID: 4176348961009428891}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &8945453429783237847
+--- !u!1001 &5617603079699218944
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -303,11 +303,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2928046249406687394, guid: 94c79d322d4007f4fa019c3f760054fb, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 171
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 2928046249406687394, guid: 94c79d322d4007f4fa019c3f760054fb, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 225.145
+      value: 481
       objectReference: {fileID: 0}
     - target: {fileID: 2928046249406687394, guid: 94c79d322d4007f4fa019c3f760054fb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -366,8 +366,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94c79d322d4007f4fa019c3f760054fb, type: 3}
---- !u!224 &6090591774932958325 stripped
+--- !u!224 &7302374247300606626 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2928046249406687394, guid: 94c79d322d4007f4fa019c3f760054fb, type: 3}
-  m_PrefabInstance: {fileID: 8945453429783237847}
+  m_PrefabInstance: {fileID: 5617603079699218944}
   m_PrefabAsset: {fileID: 0}
