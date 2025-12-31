@@ -395,10 +395,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edff354df8325c4594721458c4ab965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardUI
-  Ilust: {fileID: 0}
-  Name: {fileID: 0}
-  Description: {fileID: 0}
-  Rarity: {fileID: 0}
+  Ilust: {fileID: 3622269993876376156}
+  Name: {fileID: 2873349143420190650}
+  Description: {fileID: 393535127318453422}
+  Rarity: {fileID: 566218938992183239}
   commonSprite: {fileID: 3964668118539247905, guid: a10c7fc42a9fba041b013e55d65558a6, type: 3}
   rareSprite: {fileID: 1238687841605277098, guid: a10c7fc42a9fba041b013e55d65558a6, type: 3}
   epicSprite: {fileID: -1884140004110233142, guid: a10c7fc42a9fba041b013e55d65558a6, type: 3}

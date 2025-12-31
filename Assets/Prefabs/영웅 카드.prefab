@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 586196066689376976}
   - component: {fileID: 393535127318453422}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,12 +25,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 228143662755374207}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2510748291354054616}
+  m_Father: {fileID: 8470270706340390254}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -263,6 +263,7 @@ RectTransform:
   - {fileID: 1357375178964749860}
   - {fileID: 1827434639185129282}
   - {fileID: 5126189432616386941}
+  - {fileID: 4528119736858608551}
   m_Father: {fileID: 2510748291354054616}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -353,7 +354,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8470270706340390254}
-  - {fileID: 4528119736858608551}
   - {fileID: 6212817413637835317}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -412,10 +412,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e4bf12eb594f714e8ccd209d5f986eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HeroCardUI
-  Ilust: {fileID: 0}
-  Name: {fileID: 0}
-  Description: {fileID: 0}
-  MaxHealth: {fileID: 0}
+  Ilust: {fileID: 3622269993876376156}
+  Name: {fileID: 2873349143420190650}
+  Description: {fileID: 393535127318453422}
+  MaxHealth: {fileID: 6302173415086830819}
 --- !u!1 &4785008553247379755
 GameObject:
   m_ObjectHideFlags: 0
