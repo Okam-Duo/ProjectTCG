@@ -315,6 +315,7 @@ GameObject:
   - component: {fileID: 2510748291354054616}
   - component: {fileID: 9075409924064922850}
   - component: {fileID: 1691383275508002840}
+  - component: {fileID: 1423428564626980560}
   m_Layer: 5
   m_Name: "\uCE74\uB4DC \uC55E\uBA74"
   m_TagString: Untagged
@@ -382,6 +383,26 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1423428564626980560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3872624125690573328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edff354df8325c4594721458c4ab965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardUI
+  Ilust: {fileID: 0}
+  Name: {fileID: 0}
+  Description: {fileID: 0}
+  Rarity: {fileID: 0}
+  commonSprite: {fileID: 3964668118539247905, guid: a10c7fc42a9fba041b013e55d65558a6, type: 3}
+  rareSprite: {fileID: 1238687841605277098, guid: a10c7fc42a9fba041b013e55d65558a6, type: 3}
+  epicSprite: {fileID: -1884140004110233142, guid: a10c7fc42a9fba041b013e55d65558a6, type: 3}
+  legendarySrpite: {fileID: 2703161406467964644, guid: a10c7fc42a9fba041b013e55d65558a6, type: 3}
 --- !u!1 &4785008553247379755
 GameObject:
   m_ObjectHideFlags: 0
