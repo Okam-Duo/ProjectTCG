@@ -1,4 +1,6 @@
+using Shared;
 using Shared.Network;
+using Shared.Packets;
 using System;
 using System.Collections.Generic;
 
@@ -13,12 +15,23 @@ public class ServerEventManager
     //싱글턴
     public static ServerEventManager Instance { get; private set; } = new ServerEventManager();
 
-    public Dictionary<Type, Action<IPacket>> OnRecievePacket { get; private set; }
+    public Dictionary<PacketID, Action<IPacket>> OnRecievePacket { get; private set; }
 
     private ServerEventManager() { }
 
     public void Send(IPacket packet)
     {
-        //TODO
+        ArraySegment<byte> data = packet.Write();
+        ServerSession.Instance.Send(data);
+    }
+
+    public void RecieveData(PacketID packetID, ArraySegment<byte> buffer)
+    {
+        IPacket packet = PacketFactory.GeneratePacket(packetID, buffer);
+
+        if (OnRecievePacket.ContainsKey(packetID))
+        {
+            OnRecievePacket[packetID]?.Invoke(packet);
+        }
     }
 }
