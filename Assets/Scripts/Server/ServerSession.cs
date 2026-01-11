@@ -33,7 +33,7 @@ public class ServerSession : Session
         PacketID packetId = (PacketID)BitConverter.ToUInt16(buffer.Array, buffer.Offset + c);
         c += sizeof(ushort);
 
-        ServerEventManager.Instance.RecieveData(packetId, new ArraySegment<byte>(buffer.Array, buffer.Offset + c, packetSize - c));
+        ServerEventManager.RecieveData(packetId, new ArraySegment<byte>(buffer.Array, buffer.Offset + c, packetSize - c));
 
         return buffer.Count;
     }

@@ -15,26 +15,47 @@ using System.Threading.Tasks;
 public class ServerEventManager
 {
     //싱글턴
-    public static ServerEventManager Instance { get; private set; } = new ServerEventManager();
+    private static ServerEventManager _instance = new ServerEventManager();
 
-    public Dictionary<PacketID, Action<IPacket>> OnRecievePacket { get; private set; } = new();
+    private Dictionary<PacketID, Action<IPacket>> _onRecievePacket = new();
 
     private ServerEventManager() { }
 
-    public void Send(IPacket packet)
+    public static void Send(IPacket packet)
     {
         ArraySegment<byte> data = packet.Write();
         ServerSession.Instance.Send(data);
     }
 
-    public void RecieveData(PacketID packetID, ArraySegment<byte> buffer)
+    public static void RecieveData(PacketID packetID, ArraySegment<byte> buffer)
     {
         IPacket packet = PacketFactory.GeneratePacket(packetID, buffer);
 
-        if (OnRecievePacket.ContainsKey(packetID))
+        if (_instance._onRecievePacket.ContainsKey(packetID))
         {
-            OnRecievePacket[packetID]?.Invoke(packet);
+            _instance._onRecievePacket[packetID]?.Invoke(packet);
         }
+    }
+
+    public static void RegistRecievePacketCallBack(PacketID packetId, Action<IPacket> callBack)
+    {
+        if (_instance._onRecievePacket.ContainsKey(packetId))
+        {
+            _instance._onRecievePacket[packetId] += callBack;
+        }
+        else
+        {
+            _instance._onRecievePacket[packetId] = callBack;
+        }
+    }
+
+    public static bool UnregistRecievePacketCallBack(PacketID packetId, Action<IPacket> callBack)
+    {
+        bool isContained = _instance._onRecievePacket.ContainsKey(packetId);
+        if (!isContained) return false;
+
+        _instance._onRecievePacket[packetId] -= callBack;
+        return true;
     }
 
     public static void ConnectServerAsync()
