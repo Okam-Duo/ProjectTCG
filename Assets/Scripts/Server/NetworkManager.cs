@@ -68,6 +68,7 @@ public class NetworkManager : MonoBehaviour
         return true;
     }
 
+#warning 서버 연결 실패시 예외처리 필요
     public static void ConnectServerAsync()
     {
         static void Logic()
