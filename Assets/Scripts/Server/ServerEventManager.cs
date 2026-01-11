@@ -17,7 +17,7 @@ public class ServerEventManager
     //싱글턴
     public static ServerEventManager Instance { get; private set; } = new ServerEventManager();
 
-    public Dictionary<PacketID, Action<IPacket>> OnRecievePacket { get; private set; }
+    public Dictionary<PacketID, Action<IPacket>> OnRecievePacket { get; private set; } = new();
 
     private ServerEventManager() { }
 
