@@ -5,21 +5,34 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-
-#warning 클라이언트 개발용 임시 어댑터 클래스, 추후 기능 연결 필요
-//추가 데이터는 전부 long타입으로 때워놨으니 나중에 변경하거나 로직 추가 필요
-//커플링을 신경쓸 필요가 없다고 판단될 시 패킷 수신 이벤트를 콜백에서 함수로 변경 바람
-
+using System.Collections.Concurrent;
+using UnityEngine;
 
 //패킷 송수신 어댑터
-public class ServerEventManager
+public class ServerEventManager : MonoBehaviour
 {
     //싱글턴
-    private static ServerEventManager _instance = new ServerEventManager();
+    private static ServerEventManager _instance;
 
     private Dictionary<PacketID, Action<IPacket>> _onRecievePacket = new();
+    private ConcurrentQueue<KeyValuePair<PacketID, IPacket>> _callBackQueue = new();
 
-    private ServerEventManager() { }
+    private void Update()
+    {
+        //Flush _callBackQueue
+        while (_callBackQueue.Count > 0)
+        {
+            KeyValuePair<PacketID, IPacket> data;
+            bool success = _callBackQueue.TryDequeue(out data);
+
+            if (!success) break;
+
+            if (_instance._onRecievePacket.ContainsKey(data.Key))
+            {
+                _instance._onRecievePacket[data.Key]?.Invoke(data.Value);
+            }
+        }
+    }
 
     public static void Send(IPacket packet)
     {
@@ -31,10 +44,7 @@ public class ServerEventManager
     {
         IPacket packet = PacketFactory.GeneratePacket(packetID, buffer);
 
-        if (_instance._onRecievePacket.ContainsKey(packetID))
-        {
-            _instance._onRecievePacket[packetID]?.Invoke(packet);
-        }
+        _instance._callBackQueue.Enqueue(new(packetID, packet));
     }
 
     public static void RegistRecievePacketCallBack(PacketID packetId, Action<IPacket> callBack)
@@ -75,5 +85,13 @@ public class ServerEventManager
 
         Task t = new Task(Logic);
         t.Start();
+    }
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Init()
+    {
+        GameObject g = new GameObject(nameof(ServerEventManager));
+        DontDestroyOnLoad(g);
+        _instance = g.AddComponent<ServerEventManager>();
     }
 }
