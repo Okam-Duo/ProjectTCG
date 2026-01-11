@@ -28,9 +28,12 @@ public class ServerSession : Session
     {
         //DebugUtil.Log($"[From Server] {}");
 
+        ushort packetSize = BitConverter.ToUInt16(buffer.Array, buffer.Offset);
         int c = sizeof(ushort);
-        PacketID packetId = (PacketID)BitConverter.ToUInt16(buffer.Array, c);
-        ServerEventManager.Instance.RecieveData(packetId, new ArraySegment<byte>(buffer.Array, c, buffer.Count - c));
+        PacketID packetId = (PacketID)BitConverter.ToUInt16(buffer.Array, buffer.Offset + c);
+        c += sizeof(ushort);
+
+        ServerEventManager.Instance.RecieveData(packetId, new ArraySegment<byte>(buffer.Array, buffer.Offset + c, packetSize - c));
 
         return buffer.Count;
     }
