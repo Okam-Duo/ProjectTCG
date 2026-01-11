@@ -9,10 +9,10 @@ using System.Collections.Concurrent;
 using UnityEngine;
 
 //패킷 송수신 어댑터
-public class ServerEventManager : MonoBehaviour
+public class NetworkManager : MonoBehaviour
 {
     //싱글턴
-    private static ServerEventManager _instance;
+    private static NetworkManager _instance;
 
     private Dictionary<PacketID, Action<IPacket>> _onRecievePacket = new();
     private ConcurrentQueue<KeyValuePair<PacketID, IPacket>> _callBackQueue = new();
@@ -90,8 +90,8 @@ public class ServerEventManager : MonoBehaviour
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Init()
     {
-        GameObject g = new GameObject(nameof(ServerEventManager));
+        GameObject g = new GameObject(nameof(NetworkManager));
         DontDestroyOnLoad(g);
-        _instance = g.AddComponent<ServerEventManager>();
+        _instance = g.AddComponent<NetworkManager>();
     }
 }
