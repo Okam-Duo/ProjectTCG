@@ -3,6 +3,8 @@ using Shared.Network;
 using Shared.Packets;
 using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
 
 #warning 클라이언트 개발용 임시 어댑터 클래스, 추후 기능 연결 필요
 //추가 데이터는 전부 long타입으로 때워놨으니 나중에 변경하거나 로직 추가 필요
@@ -33,5 +35,24 @@ public class ServerEventManager
         {
             OnRecievePacket[packetID]?.Invoke(packet);
         }
+    }
+
+    public static void ConnectServerAsync()
+    {
+        static void Logic()
+        {
+            //DNS (Domain Name System)
+            string host = Dns.GetHostName();
+            IPHostEntry ipHost = Dns.GetHostEntry(host);
+            IPAddress ipAddr = ipHost.AddressList[0];
+            IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
+
+            Connector connector = new Connector();
+
+            connector.Connect(endPoint, () => { return new ServerSession(); });
+        }
+
+        Task t = new Task(Logic);
+        t.Start();
     }
 }
