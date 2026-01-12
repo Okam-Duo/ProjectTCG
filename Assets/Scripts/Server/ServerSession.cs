@@ -14,6 +14,8 @@ public class ServerSession : Session
         DebugUtil.Log($"OnConnected : {endPoint}");
 
         Instance = this;
+
+        NetworkManager.Send(new C_BuyShopItemReq() { itemIndex = 12 });
     }
 
     public override void OnDisconnected(EndPoint endPoint)
@@ -33,7 +35,7 @@ public class ServerSession : Session
         PacketID packetId = (PacketID)BitConverter.ToUInt16(buffer.Array, buffer.Offset + c);
         c += sizeof(ushort);
 
-        ServerEventManager.RecieveData(packetId, new ArraySegment<byte>(buffer.Array, buffer.Offset + c, packetSize - c));
+        NetworkManager.RecieveData(packetId, new ArraySegment<byte>(buffer.Array, buffer.Offset + c, packetSize - c));
 
         return buffer.Count;
     }
