@@ -17,6 +17,8 @@ public class NetworkManager : MonoBehaviour
     private Dictionary<PacketID, Action<IPacket>> _onRecievePacket = new();
     private ConcurrentQueue<KeyValuePair<PacketID, IPacket>> _callBackQueue = new();
 
+    public bool IsConnected => ServerSession.Instance != null;
+
     private void Update()
     {
         //Flush _callBackQueue
@@ -86,6 +88,11 @@ public class NetworkManager : MonoBehaviour
 
         Task t = new Task(Logic);
         t.Start();
+    }
+
+    public static void DisconnectServer()
+    {
+        ServerSession.Instance.Disconnect();
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
