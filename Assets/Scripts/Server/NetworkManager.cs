@@ -22,7 +22,7 @@ public class NetworkManager : MonoBehaviour
 
 
     //서버에 연결 되었는가?
-    public bool IsConnected => ServerSession.Instance != null;
+    public static bool IsConnected => ServerSession.Instance != null;
 
 
     private void Update()
