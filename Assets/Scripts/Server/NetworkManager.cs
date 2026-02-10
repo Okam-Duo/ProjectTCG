@@ -20,6 +20,7 @@ public class NetworkManager : MonoBehaviour
     //쓰레드로부터 안전한 읽기/쓰기가 가능한 큐 타입, 실행할 콜백 임시 저장용
     private ConcurrentQueue<KeyValuePair<PacketID, IPacket>> _callBackQueue = new();
 
+    private ConcurrentQueue<Action> _onConnectCallBackQueue = new();
 
     //서버에 연결 되었는가?
     public static bool IsConnected => ServerSession.Instance != null;
@@ -75,9 +76,9 @@ public class NetworkManager : MonoBehaviour
 
     //비동기적으로 서버에 연결을 시도함
 #warning 서버 연결 실패시 예외처리 필요
-    public static void ConnectServerAsync()
+    public static void ConnectServerAsync(Action<bool> onConnectCallBack)
     {
-        static void Logic()
+        static void Logic(Action<bool> onConnectCallBack)
         {
             //DNS (Domain Name System)
             string host = Dns.GetHostName();
@@ -85,12 +86,17 @@ public class NetworkManager : MonoBehaviour
             IPAddress ipAddr = ipHost.AddressList[0];
             IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
 
-            Connector connector = new Connector();
+            Connector connector = new Connector(
+                (isConnected) =>
+                {
+                    _instance._onConnectCallBackQueue.Enqueue(() => onConnectCallBack(isConnected));
+                }
+                );
 
             connector.Connect(endPoint, () => { return new ServerSession(); });
         }
 
-        Task t = new Task(Logic);
+        Task t = new Task(() => Logic(onConnectCallBack));
         t.Start();
     }
 
@@ -124,6 +130,16 @@ public class NetworkManager : MonoBehaviour
             {
                 _instance._onRecievePacket[data.Key]?.Invoke(data.Value);
             }
+        }
+
+        while(_onConnectCallBackQueue.Count > 0)
+        {
+            Action onConnectCallBack;
+            bool dequeueSuccess = _onConnectCallBackQueue.TryDequeue(out onConnectCallBack);
+
+            if (!dequeueSuccess) break;
+
+            onConnectCallBack?.Invoke();
         }
     }
 }
