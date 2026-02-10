@@ -14,8 +14,6 @@ public class ServerSession : Session
         DebugUtil.Log($"OnConnected : {endPoint}");
 
         Instance = this;
-
-        NetworkManager.Send(new C_BuyShopItemReq() { itemIndex = 12 });
     }
 
     public override void OnDisconnected(EndPoint endPoint)
