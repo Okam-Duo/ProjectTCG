@@ -88,4 +88,9 @@ public class LoginTestUI : MonoBehaviour
         S_LoginRes res = (S_LoginRes)p;
         Log($"로그인 성공 여부 : {res.isSuccess}\n닉네임 : {res.nickName}\nuserId : {res.uid}");
     }
+
+    private void OnApplicationQuit()
+    {
+        NetworkManager.Send(new C_LogoutReq());
+    }
 }
