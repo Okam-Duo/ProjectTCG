@@ -11,6 +11,7 @@ public class LoginTestUI : MonoBehaviour
     [SerializeField] private TMP_InputField _nickNameField;
     [SerializeField] private Button _idCheckButton;
     [SerializeField] private Button _loginButton;
+    [SerializeField] private Button _logoutButton;
     [SerializeField] private Button _SignInButton;
 
     private void Awake()
@@ -22,6 +23,7 @@ public class LoginTestUI : MonoBehaviour
 
         _idCheckButton.onClick.AddListener(OnClickIdCheckButton);
         _loginButton.onClick.AddListener(OnClickLoginButton);
+        _logoutButton.onClick.AddListener(OnClickLogoutButton);
         _SignInButton.onClick.AddListener(OnClickSignInButton);
     }
 
@@ -58,6 +60,11 @@ public class LoginTestUI : MonoBehaviour
         string password = _passwordField.text;
 
         NetworkManager.Send(new C_LoginReq(id, password.GetHashCode()));
+    }
+
+    private void OnClickLogoutButton()
+    {
+        NetworkManager.Send(new C_LogoutReq());
     }
 
     private void OnClickSignInButton()
