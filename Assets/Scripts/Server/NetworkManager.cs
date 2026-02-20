@@ -84,7 +84,7 @@ public class NetworkManager : MonoBehaviour
             string host = Dns.GetHostName();
             IPHostEntry ipHost = Dns.GetHostEntry(host);
             //IPAddress ipAddr = ipHost.AddressList[0];
-            IPAddress ipAddr = IPAddress.Parse("여기에 ip 입력");
+            IPAddress ipAddr = IPAddress.Parse("25.11.99.181");   //하마치 내부 ip
             IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
 
             Connector connector = new Connector(
